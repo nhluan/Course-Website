@@ -1,0 +1,66 @@
+{
+  "type": "module",
+  "name": "coursesproject",
+  "version": "1.0.0",
+  "description": "final project hcmus_web1",
+  "main": "app.js",
+  "scripts": {
+    "format": "prettier --single-quote --trailing-comma all --tab-width 4 --write 'src/**/*.{js,json,scss, hbs}'",
+    "start": "nodemon src/app.js",
+    "watch": "node-sass -w src/resources/scss/ -o src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caonhatduc9/coursesProject.git"
+  },
+  "keywords": [
+    "courses"
+  ],
+  "author": "group5",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caonhatduc9/coursesProject/issues"
+  },
+  "homepage": "https://github.com/caonhatduc9/coursesProject#readme",
+  "lint-staged": {
+    "src/**/*.{js,json,scss, hbs}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "ember-truth-helpers": "^3.1.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-handlebars": "^6.0.6",
+    "express-handlebars-sections": "^1.0.1",
+    "express-mysql-session": "^2.1.8",
+    "express-session": "^1.17.3",
+    "google-auth-library": "^8.7.0",
+    "husky": "^8.0.2",
+    "knex": "^2.3.0",
+    "lint-staged": "^13.1.0",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.8.0",
+    "normalize.css": "^8.0.1",
+    "otp-generator": "^4.0.0",
+    "prettier": "^2.8.1",
+    "slug": "^8.2.2",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "node-sass": "^8.0.0",
+    "nodemon": "^2.0.20"
+  }
+}
