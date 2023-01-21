@@ -1,0 +1,167 @@
+<div class="d-flex" id="wrapper">
+    {{!-- side bar --}}
+
+    {{> admin/adminSideNav}}
+
+    {{!-- content --}}
+    <div class="page-content-wrapper container-fluid px-5">
+        <nav class="navbar navbar-expand navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 mr-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Dashboard</h2>
+            </div>
+        </nav>
+        <div class="row justify-content-end">
+            <div class="col-4">
+                {{#if message}}
+                {{#if_eq type "success"}}
+                <div style="background-color: rgb(5, 106, 72); color: white"
+                    class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Notice!</strong> {{../message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{else}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Notice!</strong> {{../message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{/if_eq}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row my-4">
+                <div class="col px-5">
+                    <h1 class="text-center text-uppercase">courses list</h1>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6 px-5">
+                    <div class="row"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-5 ">
+            <div class="col px-5">
+                <table class="table bg-white rounded shadow-sm  table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-uppercase" width="50">#</th>
+                            <th scope="col" class="text-uppercase">Name</th>
+                            <th scope="col" class="text-uppercase">Fee</th>
+                            <th scope="col" class="text-uppercase">Brief Description</th>
+                            <th scope="col" class="text-uppercase">Creation Date</th>
+                            <th scope="col" class="text-uppercase">Views</th>
+                            <th scope="col" class="text-uppercase">Status</th>
+                            <th scope="col" class="text-uppercase">Teacher</th>
+                            <th scope="col" class="text-uppercase" class="text-left p-2">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each this.data}}
+                        <tr>
+                            <th scope="row">{{sum 1 @index}}</th>
+                            <td>{{name_course}}</td>
+                            <td>{{tuition_fee}}</td>
+                            <td>{{brief_description}}</td>
+                            <td>{{creation_date}}</td>
+                            <td>{{views}}</td>
+                            <td>{{status}}</td>
+                            <td>{{name_user}}</td>
+                            <td class="d-flex justify-content-between">
+                                <a href="{{id_course}}" type="button" class="btn btn-outline-danger btn-lg"
+                                    data-id="{{id_course}}" data-toggle="modal" data-target="#deleteModal"><i
+                                        class="fa-solid fa-trash mr-3"></i>Delete</a>
+                                {{#if_eq active_course 1}}
+                                <a href="course/disable/{{../id_course}}?value=0" type="button"
+                                    class="btn btn-outline-dark"><i class="fa-solid fa-lock mr-1 pr-3"></i>Lock</a>
+                                {{else}}
+                                {{!-- truong hop nay da bi khoa --}}
+                                <a href="course/disable/{{../id_course}}?value=1" type="button"
+                                    class="btn btn-outline-dark"><i class="fa-solid fa-lock-open mr-1"></i>Unlock</a>
+                                {{/if_eq}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {{#each pageNumbers as |alias|}}
+                        {{#if isCurrent }}
+                        <li class="page-item active"><a class="page-link" href="javascript:;">{{value}}</a></li>
+                        {{else}}
+                        <li class="page-item"><a class="page-link" href="?page={{value}}">{{value}}</a></li>
+                        {{/if}}
+                        {{/each}}
+
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="exampleModalLabel"> warning! </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <b> Delete this course? </b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-lg btn-secondary p-2" data-dismiss="modal">Cancel</button>
+                <button type="button" id="btn-delete-course" class="btn btn-lg btn-danger ml-3 p-2">
+                    Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- form hidden --}}
+<form method="POST" name="delete-post-form"></form>
+{{#section "js"}}
+<script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let courseId;
+        let deleteForm = document.forms['delete-post-form'];
+        let btnDelCourse = document.getElementById('btn-delete-course');
+        console.log(btnDelCourse);
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget) // Button that triggered the modal
+            courseId = button.data('id') // Extract info from data-* attributes
+        });
+
+        btnDelCourse.onclick = function () {
+            console.log("click");
+            deleteForm.action = "course/" + courseId + "?_method=DELETE";
+            deleteForm.submit();
+        }
+    });
+</script>
+
+{{/section}}

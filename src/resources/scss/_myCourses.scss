@@ -1,0 +1,40 @@
+@import 'homepage';
+.my-courses {
+    .my-courses-container {
+        margin-bottom: 30px;
+    }
+    .btn-my-course {
+        max-width: 45%;
+    }
+    .btn-add-course {
+        width: 50%;
+        margin: 0 auto;
+        height: 42px;
+        a {
+            height: 100%;
+            display: flex;
+            /* align-items: center; */
+            /* justify-content: center; */
+            /* text-align: center; */
+            margin: 0 auto;
+            font-size: 2rem;
+            display: block;
+            width: 144px;
+        }
+    }
+}
+td > a {
+    width: 81px;
+    margin-right: 10px;
+}
+.btn-add-course {
+    font-size: 2rem;
+}
+.card-no-data {
+    font-size: 3rem;
+    margin: 10px 30px 0;
+    color: red;
+}
+.card-text-no-data {
+    margin: 18px;
+}

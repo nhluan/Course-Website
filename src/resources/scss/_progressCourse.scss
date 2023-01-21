@@ -1,0 +1,173 @@
+.container-course {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+
+    .content-lession {
+        flex: 3;
+        width: 60%;
+        
+        .lession-video {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-nav {
+            font-size: 4rem;
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 15rem;
+        }
+
+        .lession-title {
+            margin-left: 14rem;
+            margin-top: 2rem;
+            font-size: 3rem;
+            font-weight: 700;
+            width: 74%;
+            background: white;
+            padding-top: 2rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 3.5rem;
+
+            p {
+                margin-left: 2rem;
+            }
+        }
+
+        .lession-dicussion {
+            margin-left: 15rem;
+            margin-top: 2rem;
+            width: 72%;
+            // background-color: red;
+
+
+            h2 {
+                font-size: 3rem;
+                font-weight: 500;
+
+            }
+
+            textarea {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                height: 15%;
+                margin-top: 2rem;
+                border-radius: 1rem;
+            }
+
+            textarea:focus {
+                border: 2px solid black;
+                outline: 0;
+            }
+
+            button {
+                font-size: 2rem;
+                border: 1px solid black;
+                border-radius: 1rem;
+                width: 17rem;
+                height: 6rem;
+                padding: 1rem 0.5rem 1rem 1rem;
+                background-color: #C0DEFF;
+                margin-top: 2rem;
+            }
+
+            button:hover {
+                background-color: #3E6D9C;
+            }
+
+            .btn-submit {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+    }
+
+    .course {
+        flex: 1;
+        background-color: white;
+        padding-left: 4rem;
+        padding-top: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        height: max-content;
+
+        ul {
+            list-style-type: none;
+        }
+
+        .course-chapter {
+            h3 {
+                font-size: 2rem; 
+                font-weight: 700;
+            }
+
+            ul li {
+                font-size: 2rem;
+                padding: 1rem 1rem; 
+            }
+
+            ul li a:hover {
+                color: blue;
+            }
+        }
+    }
+}
+
+.infor-course {
+    width: 100%;
+    height: 20%;
+    background-color: #3E6D9C;
+    margin-top: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 3rem;
+
+    .course-header {
+        width: 60%;
+
+        h3 {
+            color: white;
+            font-size: 4rem;
+            font-weight: 700;
+            padding: 2rem 2rem;
+            margin-top: 2.5rem;
+        }
+    }
+
+    .course-progress {
+        height: 3rem;
+        width: 26rem;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 1rem;
+        margin-right: 8rem; 
+        
+
+
+        .progress-fill {
+            height: 100%;
+            width: 1%;
+            background-color: green; 
+            border-radius: 1rem;
+        }
+
+        .progress_percent {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem; 
+            font-size: 2rem; 
+            font-weight: 600;
+            color: white
+        }
+
+
+    }
+
+}

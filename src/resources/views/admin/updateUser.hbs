@@ -1,0 +1,23 @@
+<div class="d-flex" id="wrapper">
+    {{!-- side bar --}}
+
+    {{> admin/adminSideNav}}
+
+    {{!-- content --}}
+    <div class="page-content-wrapper container-fluid px-5">
+        <nav class="navbar navbar-expand navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 mr-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Dashboard</h2>
+            </div>
+        </nav>
+
+        <div class="container p-5">
+            {{#each data}}
+            {{> admin/formUser}}
+            {{/each}}
+            {{!-- <h1>{{referer}}</h1> --}}
+        </div>
+    </div>
+
+</div>

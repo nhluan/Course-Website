@@ -1,0 +1,61 @@
+div img.imgg {
+    height: 200px;
+    width: 250px;
+    object-fit: contain;
+    background: white;
+}
+
+.search_course {
+    margin-bottom: 8px;
+    padding: 16px;
+
+    & div {
+        & div {
+            & a {
+                width: 100px;
+                height: 40px;
+                color: white;
+                line-height: 30px;
+            }
+        }
+    }
+}
+
+.rating_star {
+    color: orange;
+}
+
+.btn_filter {
+    margin: 8px;
+    padding: 8px 16px;
+    border: 1px solid black;
+    height: 50px;
+}
+
+.btn-dropdown-filter {
+    width: 270px;
+}
+
+.dropdown-sort {
+    margin: 8px;
+    padding: 8px 16px;
+    border: 1px solid black;
+    height: 50px;
+    width: 230px;
+
+    &+div {
+        & a {
+            height: 40px;
+            width: 160px;
+            margin: 0;
+            padding-left: 10px;
+            line-height: 35px;
+        }
+    }
+}
+
+
+#all-filter {
+    margin-right:40px ;
+    width:270px;
+}

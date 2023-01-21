@@ -1,0 +1,103 @@
+.footer-nav {
+    background-color: #24262b;
+    padding: 70px 0;
+    color: white;
+
+    .footer-container {
+        max-width: 1170px;
+        // background-color: red;
+        margin: auto;
+
+        ul {
+            list-style-type: none;
+        }
+
+        .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+
+            .footer-item {
+                width: 25%;
+                padding: 0 15px;
+
+                h4 {
+                    font-size: 2.5rem;
+                    color: white;
+
+                    // chuyen doi chu cai dau thanh chu hoa
+                    text-transform: capitalize;
+                    margin-bottom: 2.5rem;
+                    font-weight: 500;
+                    position: relative;
+                }
+
+                h4::before {
+                    content: ""; 
+                    position: absolute;
+                    left: 0; 
+                    bottom: -0.8rem; 
+                    background-color: green;
+                    height: 0.3rem;
+                    box-sizing: border-box;
+                    width: 50px;
+
+                }
+
+                ul li:not(:last-child){
+                    margin-bottom: 0.8rem;
+                }
+
+                ul li a {
+                    font-size: 1.5rem; 
+                    color: #bbbbbb; 
+                    display: block;
+                    font-weight: 300;
+                    transition: all 0.3s ease;
+                }
+
+                ul li a:hover {
+                    color: #ffffff; 
+                    padding-left: 1rem;
+                }
+
+                .item-links a {
+                    display: inline-block;
+                    height: 4rem;
+                    width: 4rem;
+                    background-color: rgba(255, 255, 255, 0.3);
+                    margin: 0 1rem 1rem 0; 
+                    text-align: center;
+                    line-height: 6rem;
+                    border-radius: 50%;
+                    color: #ffffff; 
+                    padding-top: 1rem;
+
+                    i {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                .item-links a:hover {
+                    color: black; 
+                    background-color: green;
+                }
+            }
+        }
+    }
+}
+
+//responsive 
+@media screen and (max-width: 714px) {
+    .footer-item {
+        width: 50%;
+        margin-top: 3rem; 
+    }
+}
+
+@media screen and (max-width: 574px) {
+    .footer-item {
+        width: 100%;
+    }
+}

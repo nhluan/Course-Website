@@ -1,0 +1,386 @@
+{{#section "js"}}
+    <script>
+
+        function regCourse() {
+            const dataE = document.querySelector("#dataHide");
+            const dataE2 = document.querySelector("#dataHide2");
+
+            console.log("da nhan");
+
+            const startPos = parseInt(dataE2.innerText);
+
+            const data = dataE.innerText.split(",");
+
+            console.log("data: ", data);
+
+            //0: id user
+            //1: id course
+            //startPost: id_lesson
+            const userObj = {id_user: data[0], id_course: data[1]};
+            // console.log("userObj: ", userObj);
+            //
+            // courseModel.registerCourse(userObj);
+            //
+            // const windowPath = window.location.href;
+            // const pathLesson = "/learn/" + data[0] + "/lecture/" + data[1];
+            // windowPath.replace(pathLesson);
+            // window.location.href = pathLesson;
+
+
+        }
+
+  function hanldeClickAddLesson(modify) {
+    window.location.replace('http://localhost:3000/course/mycourses/modify/lesson?id={{courses.[0].id_course}}&modify=' + modify);
+  }
+  function hanldeClickUpdateLesson(modify, id_lesson) {
+    window.location.replace('http://localhost:3000/course/mycourses/modify/lesson?id={{courses.[0].id_course}}&id_lesson=' + id_lesson + '&modify=' + modify);
+  }
+</script>
+
+
+{{#if_eq authUser.role 1}}
+<script>
+  const btnElements = document.querySelectorAll("#btnUpdateLesson");
+  btnElements.forEach((b) => {
+    b.className = "border rounded-pill mt-2 p-4 btn-info d-block"
+  })
+</script>
+{{/if_eq}}
+
+{{/section}}
+
+<div class="body-course">
+
+    <div class="container">
+        {{#with courses.[0]}}
+            <div id="dataHide" style="display: none;">
+                {{authUser.id_user}}, {{id_course}}
+            </div>
+        <div class="name">
+            <h1 style="margin-left: 2rem; ">
+                {{name_course}}
+            </h1>
+        {{/with}}
+
+        <div class="name-intro">
+            <div class="name-intro-right" style="margin-top: 10px;">
+                <div class="detail-teacher">
+                    <a href="#">
+                        <span style="color: white; font-size: 1.5rem; font-weight: 600">{{nameTeacher}}</span>
+                    </a>
+                </div>
+
+                <div class="detail-rate" style="margin-top: 5px">
+                    <p style="font-size: 1.5rem">{{agvRating}} <i class="fa-solid fa-star"
+                                                                  style="color: yellow;"></i>
+                        <span style="margin-left: 2rem; font-size: 1.5rem;">{{numberRating}} đánh giá</span>
+                    </p>
+                </div>
+            </div>
+
+
+            {{#if auth}}
+                {{#if checkLove}}
+                    <form action="/course/delWatchList" method="post">
+                        {{#with courses.[0]}}
+                            <input type="text" name="id_course" value="{{id_course}}" style="display: none">
+                            <input type="text" name="name_course" value="{{name_course}}" style="display: none">
+                        {{/with}}
+                        <input type="text" name="id_user" value="{{authUser.id_user}}" style="display: none">
+                        <input type="submit" value="Hủy yêu thích"
+                               style="background-color: red; color: white; font-weight: 500; ">
+                    </form>
+                {{else}}
+                    <form action="/course/addWatchList" method="post">
+                        {{#with courses.[0]}}
+                            <input type="text" name="id_course" value="{{id_course}}" style="display: none">
+                            <input type="text" name="name_course" value="{{name_course}}" style="display: none">
+                        {{/with}}
+                        <input type="text" name="id_user" value="{{authUser.id_user}}" style="display: none">
+                        <input type="submit" value="Thêm yêu thích"
+                               style="background-color: white; color: red; font-weight: 500; ">
+                    </form>
+                {{/if}}
+            {{else}}
+                <a href="/auth/login" class="intro-guest" style="
+    background-color: white;
+    border-radius: 3rem;
+    width: 20%;
+    height: max-content !important;
+    padding: 1rem 1rem;
+">Thêm yêu thích</a>
+            {{/if}}
+
+        </div>
+    </div>
+        {{#with courses.[0]}}
+
+        <div class="handle-course">
+            <p style="padding: 5px 20px; margin-top: 15px; font-size: 5rem; font-weight: 500; ">
+                {{tuition_fee}} VND
+            </p>
+        {{/with}}
+
+        {{#if auth}}
+            {{#if checkBuy}}
+                {{#with startLesson}}
+                    <a href="/learn/{{id_course}}/lecture/{{id_lesson}}" class="handle-buy"
+                       style="background-color: deepskyblue">Vào
+                        học ngay</a>
+                    <div id="dataHide2" style="display: none">
+                        {{id_lesson}}
+                    </div>
+                {{/with}}
+            {{else}}
+                <form action="/course/regCourse" method="post">
+                    {{#with startLesson}}
+                        <input type="text" name="id_course" value="{{id_course}}" style="display: none">
+                        <input type="text" name="id_lesson" value="{{id_lesson}}" style="display: none">
+                    {{/with}}
+                    <input type="submit" value="Đăng kí ngay"
+                           style="font-size: 2rem; font-weight: 800;color: white;   border: 1px solid black; height: 6rem; width: 80%; border-radius:1rem; background-color: green; display: flex; justify-content: center; margin: auto; ">
+                </form>
+            {{/if}}
+        {{else}}
+            <a href="/auth/login" class="handle-buy">Đăng ký ngay</a>
+        {{/if}}
+
+        <div class="handle-adv">
+            <p>
+                <i class="fa-solid fa-hourglass-end"></i>
+                Thời lượng: <b>                
+                {{duration}} phút
+            </b>
+            </p>
+
+            <p>
+                <i class="fa-solid fa-book"></i>
+                {{numberLesson}} bài giảng
+            </p>
+
+            <p>
+                <i class="fa-solid fa-house-crack"></i>
+                Bảo hành trọn đời
+            </p>
+
+            <p>
+                <i class="fa-solid fa-building-columns"></i>
+                Cấp chứng nhận hoàn thành
+            </p>
+
+            <p>
+                <i class="fa-solid fa-percent"></i>
+                Giảm thêm khi thanh toán online
+            </p>
+
+        </div>
+
+
+    </div>
+        {{#with courses.[0]}}
+
+    <div class="detail-course">
+      <img src="/img/courses/{{avatar}}" alt="Picture ADV" class="course-img">
+
+      <ul class="detail-nav">
+        <li><a href="#intro-cour">Giới thiệu</a></li>
+        <li><a href="#content-cour">Nội dung khóa học</a></li>
+        <li><a href="#intro-teacher">Thông tin giảng viên</a></li>
+        <li><a href="#rate">Đánh giá</a></li>
+        </li>
+      </ul>
+
+      <div class="learn-what">
+        <h3>Bạn sẽ học được những gì trong khóa học?</h3>
+        <ul class="adv-list">
+          <li>
+            <i class="far fa-check-circle" style="color: green;"></i>
+            <span>{{brief_description}}</span>
+          </li>
+
+        </ul>
+      </div>
+
+      <div id="intro-cour">
+        <h3>
+          Giới thiệu khóa học
+        </h3>
+
+        <hr>
+
+        <div class="intro-list-nega">
+          <p>
+            <i class="fa-solid fa-circle-xmark" style="color: red; margin-right: 5px;"></i>
+            {{detailed_description}}
+          </p>
+
+        </div>
+
+            </div>
+        {{/with}}
+
+
+      <div id="content-cour">
+        <div class="d-flex justify-content-between">
+          <p>Nội dung khóa học</p>
+          {{#if_eq authUser.role 1}}
+          <button type="button" class="border rounded-pill mt-2 mr-3 p-4 btn-info"
+            onclick="hanldeClickAddLesson('add')">add lesson</button>
+          {{/if_eq}}
+        </div>
+        <hr>
+        <div class="content-body">
+
+          <ul class="body-list">
+            {{#each courses}}
+            <li>
+              <a>
+                <i class="fa-solid fa-circle-play"></i>
+                {{!-- Chương {{name_chapter}}: {{name_lession}}</a> --}}
+              Bài học :{{name_lession}}</a>
+              <div class="d-flex flex-nowrap">
+
+                <p class="pr-5"> {{duration}} minutes</p>
+
+
+                <button id="btnUpdateLesson" name="btnUpdateLesson" type="button"
+                  class="border rounded-pill mt-2 p-4 btn-info d-none"
+                  onclick="hanldeClickUpdateLesson('update','{{id_lesson}}')">update
+                  lesson</button>
+              </div>
+
+            </li>
+
+            <hr>
+
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
+
+      <div id="intro-teacher">
+        <p class="intro-teacher-title">Thông tin giảng viên</p>
+
+        <hr>
+
+            <div class="detail-teacher">
+                <div class="teacher-left">
+                    <img src="/img/{{avatar_user}}" width="100"
+                         height="100" alt="Hinh anh giang vien" style="border-radius: 50%;">
+                    <p>
+                        <i class="fa-solid fa-users"></i>
+                        {{countStudent}} học viên
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-circle-play"></i>
+                        {{countCourseByTeacher}} khóa học
+                    </p>
+                </div>
+
+                <div class="teacher-right">
+                    <a href="#">{{nameTeacher}}</a>
+
+                    <p>Trình độ thạc sĩ, tiến sĩ chuyên viên kĩ thuật cấp cao</p>
+
+                    <ul>
+                        <li>Đào tạo hàng nghìn học viên với chất lượng đầu cao luôn nằm trong top 100
+                        </li>
+                        <li>Chương trình chuẩn được biên soạn từ nhiều năm và cập nhật liên tục theo xu hướng
+                        </li>
+                        <li>Đảm bảo cho bạn sự tin tưởng về kiến thức của giảng viên một cách chân thực nhất
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="rate">
+            <p class="rate-title">
+                Đánh giá của học viên
+            </p>
+
+            <hr>
+
+            <div class="rate-body">
+
+                <p>
+                    {{agvRating}}<i class="fa-solid fa-star" style="color: yellow;"></i>
+
+                </p>
+
+                <div class="rate-number">
+                    {{numberRating}} lượt đánh giá
+                </div>
+
+                {{#if checkShowContent}}
+                    <ul class="rate-content">
+                        {{#each fullReview}}
+                            <li>{{name_user}} ( {{point}} <i class="fa-solid fa-star" style="color: yellow;"></i>) : {{content}}</li>
+                            <hr>
+                        {{/each}}
+                    </ul>
+                {{else}}
+                    <p class="rate-none-content">Chưa có đánh giá nào!!!!</p>
+
+
+                {{/if}}
+            </div>
+        </div>
+
+        {{#if auth}}
+            {{#if checkBuy}}
+                <div class="inputCmt">
+                    <p class="inputCmt-title">
+                        Gửi đánh giá của bạn
+                    </p>
+                    <form action="/course/postReview" method="post">
+                        <div class="point-input">
+                            <label for="pointReview">Điểm đánh giá của bạn:</label>
+                            <select id="pointReview" name="pointReview">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div style="display: none">
+                            {{#with startLesson}}
+                                <input type="text" name="id_course" value="{{id_course}}">
+                                <input type="text" name="name_course" value="{{name_course}}">
+                            {{/with}}
+                        </div>
+
+                        <div class="content-input">
+                            {{#with reviewData}}
+                                <label for="contentReview">Nội dung đánh giá:</label><br>
+                                <textarea name="contentReview" rows="10" cols="30">{{content}}</textarea>
+                            {{/with}}
+
+                        </div>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+
+            {{else}}
+                <div style="height: max-content; width: 63%; background-color: white; border-radius: 2px; ">
+                    <p style=" padding: 2rem 2rem; margin-left: 2.5rem; font-size: 1.5rem; font-weight: 400; ">Đăng kí
+                        khóa học để
+                        nhận xét!!!</p>
+                </div>
+            {{/if}}
+        {{else}}
+            <div style="height: max-content; width: 63%; background-color: white; border-radius: 2px; ">
+                <p style=" padding: 2rem 2rem; margin-left: 2.5rem; font-size: 1.5rem; font-weight: 400; ">Đăng nhập để
+                    bình
+                    luận!!!</p>
+            </div>
+        {{/if}}
+
+    </div>
+    </div>
+</div>
+
+</div>

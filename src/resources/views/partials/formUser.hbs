@@ -1,0 +1,175 @@
+{{#section "css"}}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
+{{/section}}
+
+<form id="form" method="POST">
+    <div class="form-group">
+        <input type="hidden" name="referer" value="{{this.referer}}">
+        <label for="name">username</label>
+        <input type="text" class="form-control form-control-lg bg-white" id="name" name="username"
+            value="{{this.name_user}}">
+        <small id="err-username" class="form-text text-muted"></small>
+    </div>
+    {{#unless this.id_user}}
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control form-control-lg bg-white" name="email" id="email"
+            value="{{authUser.email}}">
+        <small id="err-email" class="form-text text-muted"></small>
+    </div>
+    {{/unless}}
+
+    {{#unless this.id_user}}
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control form-control-lg bg-white" id="password" name="password" value="">
+        <small id="err-password" class="form-text text-muted"></small>
+    </div>
+    {{/unless}}
+    <div class="form-group">
+        <label for="dob">Date of birth</label>
+        <input type="text" class="form-control form-control-lg bg-white" id="dob" name="dob"
+            value="{{this.date_of_birth}}">
+        <small class="form-text text-muted"></small>
+    </div>
+    {{#unless this.id_user}}
+    <div class="form-group form-check p-5">
+        <select class="form-control form-control-lg" name="role" required>
+            <option>Role?</option>
+            <option value="2">Student</option>
+            <option value="1">Teacher</option>
+        </select>
+    </div>
+    {{/unless}}
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-lg px-5 py-3">Submit</button>
+    </div>
+</form>
+{{#section "js"}}
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+    crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/3a1f297a4d.js" crossorigin="anonymous"></script>
+</script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+
+    const form = document.getElementById('form');
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    console.log("name: ", name);
+    console.log("allooo1");
+
+    console.log("allooo");
+    function checkInput() {
+        let check = true;
+        let nameValue = "";
+        let emailValue = "";
+        let passwordValue = "";
+        if (name != null) {
+            nameValue = name.value.trim();
+        }
+        if (email !== null) {
+            emailValue = email.value.trim();
+        }
+        if (password !== null) {
+            passwordValue = password.value.trim();
+        }
+        if (nameValue === '') {
+            console.log("name if", name);
+            setErrorFor("err-username", name, 'name is required')
+            check = false;
+        }
+        else {
+            setSuccessFor(name);
+        }
+
+        if (emailValue === '') {
+            console.log(email)
+            setErrorFor("err-email", email, 'email is required')
+            check = false;
+        } else if (!isEmail(emailValue)) {
+            setErrorFor("err-email", email, 'invalid email');
+            check = false;
+        } else {
+            console.log(emailValue)
+            //ajax bat dong bo
+            $.ajaxSetup({
+                async: false
+            });
+            $.getJSON(`http://localhost:3000/auth/isExist?email=${emailValue}`, (data) => {
+                console.log('check email')
+                if (data === false) {
+                    setSuccessFor(email);
+                }
+                else {
+                    console.log("success")
+                    check = false;
+                    setErrorFor("err-email", email, 'Email already exists')
+                    console.log(check)
+                }
+            });
+            $.ajaxSetup({
+                async: true
+            });
+        }
+
+        if (passwordValue === '') {
+            setErrorFor("err-password", password, 'password is required')
+            check = false;
+        } else if (!isValidPass(passwordValue)) {
+            setErrorFor("err-password", password, 'least one numeric digit, one uppercase, lowercase letter')
+            check = false;
+        } else {
+            setSuccessFor(password)
+        }
+
+        return check;
+    }
+
+    function setErrorFor(id, input, msg) {
+        const small = document.getElementById(id)
+        console.log(small);
+        small.innerText = msg;
+    }
+    function setSuccessFor(input) {
+        const formControl = input.parentElement;
+        formControl.className = 'form-element success from-floating mb-4 position-relative';
+    }
+
+    function isEmail(email) {
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+    }
+    function isValidPass(password) {
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        return regex.test(password);
+    }
+    form.addEventListener('submit', e => {
+        console.log('submittttttt')
+        e.preventDefault();
+        if (checkInput()) {
+            e.currentTarget.submit();
+        }
+
+    });
+
+    $('#name').select();
+    $('#dob').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y',
+        mask: true
+    });
+
+
+</script>
+
+{{/section}}

@@ -1,0 +1,45 @@
+    .wrapper-verified {
+        background: rgb(238, 174, 202);
+        background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+        padding: 0 20px 0 20px;
+
+        & .main {
+            // display: flex;
+            // justify-content: center;
+            align-items: center;
+
+            // min-height: 100vh;
+
+            & .row {
+                width: 1000px;
+                height: 650px;
+                border-radius: 10px;
+                background: #307608;
+                box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.2);
+
+
+
+                & .right {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+
+                    & .input-box {
+                        width: 330px;
+                        box-sizing: border-box;
+
+                        & header {
+                            font-weight: 700;
+                            text-align: center;
+                            margin-bottom: 35px;
+                            color: #fff;
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+    }

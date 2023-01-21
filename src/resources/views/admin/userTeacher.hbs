@@ -1,0 +1,94 @@
+<div class="d-flex" id="wrapper">
+    {{!-- side bar --}}
+
+    {{> admin/adminSideNav}}
+
+    {{!-- content --}}
+    <div class="page-content-wrapper container-fluid px-5">
+        <nav class="navbar navbar-expand navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 mr-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Dashboard</h2>
+            </div>
+        </nav>
+        <div class="row justify-content-end">
+            <div class="col-4">
+                {{#if message}}
+                {{#if_eq type "success"}}
+                <div style="background-color: rgb(5, 106, 72); color: white"
+                    class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Notice!</strong> {{../message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{else}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Notice!</strong> {{../message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{/if_eq}}
+                {{/if}}
+            </div>
+        </div>
+        <div class="container">
+
+            <div class="row my-4">
+                <div class="col px-5 justify-content-center">
+                    <h1 class="text-center text-uppercase">Teacher List</h1>
+                </div>
+            </div>
+            <div class="row my-3 justify-content-end">
+                <button type="button" class="btn btn-primary btn-lg mr-5">
+                    <a style="color: white;" href="create"><i class="fa-solid fa-user-plus pr-3"></i><b>ADD
+                            TEACHER</b></a>
+                </button>
+            </div>
+            <div class="row my-5 ">
+                <div class="col px-5">
+                    <table class="table bg-white table-bordered rounded-3 shadow-sm table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="text-left p-2 text-uppercase" width="50">#</th>
+                                <th scope="col" class="text-left p-2 text-uppercase">username</th>
+                                <th scope="col" class="text-left p-2 text-uppercase">email</th>
+                                <th scope="col" class="text-left p-2 text-uppercase">dob</th>
+                                <th scope="col" class="text-left p-2 text-uppercase">action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each this.data}}
+                            <tr>
+                                <th scope="row">{{sum 1 @index}}</th>
+                                <td>{{name_user}}</td>
+                                <td>{{email}}</td>
+                                <td>{{date_of_birth}}</td>
+                                <td class="d-flex justify-content-between">
+                                    <a href="viewProfile/{{id_user}}" type="button" class="btn btn-outline-info btn-lg"><i
+                                            class="fa-solid fa-eye mr-3"></i>View</a>
+                                    <a href="{{this.id_user}}" type="button" class="btn btn-outline-danger btn-lg"><i
+                                            class="fa-solid fa-trash mr-3"></i>Delete</a>
+                                    <a href="update/{{id_user}}" type="button" class="btn btn-outline-success btn-lg"><i
+                                            class="fa-solid fa-pencil mr-3"></i>Update</a>
+                                    {{#if_eq active 1}}
+                                    <a href="disable/{{../id_user}}?value=0" type="button"
+                                        class="btn btn-outline-dark"><i class="fa-solid fa-lock mr-1 pr-3"></i>Lock</a>
+                                    {{else}}
+                                    {{!-- truong hop nay da bi khoa --}}
+                                    <a href="disable/{{../id_user}}?value=1" type="button"
+                                        class="btn btn-outline-dark"><i
+                                            class="fa-solid fa-lock-open mr-1"></i>Unlock</a>
+                                    {{/if_eq}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

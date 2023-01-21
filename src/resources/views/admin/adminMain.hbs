@@ -1,0 +1,60 @@
+<div class="d-flex" id="wrapper">
+	{{!-- side bar --}}
+
+	{{> admin/adminSideNav}}
+
+	{{!-- content --}}
+	<div class="page-content-wrapper container-fluid">
+		<nav class="navbar navbar-expand navbar-light bg-transparent py-4 px-4">
+			<div class="d-flex align-items-center">
+				<i class="fas fa-align-left primary-text fs-4 mr-3" id="menu-toggle"></i>
+				<h2 class="fs-2 m-0">Dashboard</h2>
+			</div>
+		</nav>
+		<div class="container-fluid px-4">
+			<div class="row g-3 ">
+				<div class="col-md-3">
+					<div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+						<div>
+							<h3 class="fs-2"><b>{{amountStudent}}</b></h3>
+							<p class="fs-5">Student</p>
+						</div>
+						<i class="fas fa-graduation-cap fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+						<div>
+							<h3 class="fs-2"><b>{{amountTeacher}}</b></h3>
+							<p class="fs-5">Teacher</p>
+						</div>
+						<i
+							class="fas fa-solid fa-person-chalkboard fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+						<div>
+							<h3 class="fs-2"><b>{{amountCourse}}</b></h3>
+							<p class="fs-5">course</p>
+						</div>
+						<i class="fas fa-book fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+						<div>
+							<h3 class="fs-2"><b>{{amountCourseNotActive}}</b></h3>
+							<p class="fs-5">course is disabled</p>
+						</div>
+						<i class="fas fa-circle-exclamation fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

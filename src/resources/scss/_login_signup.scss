@@ -1,0 +1,175 @@
+    .wrapper-auth {
+        background: rgb(238, 174, 202);
+        background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+        padding: 0 20px 0 20px;
+
+        & .main {
+            // display: flex;
+            // justify-content: center;
+            align-items: center;
+
+            // min-height: 100vh;
+
+            & .row {
+                width: 1000px;
+                height: 650px;
+                border-radius: 10px;
+                background: #fff;
+                box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.2);
+
+                & .side-image {
+                    background-image: url("/img/logo.jpg");
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    position: relative;
+                    border-radius: 10px 0 0 10px;
+                }
+
+                & .right {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+
+                    & .input-box {
+                        width: 330px;
+                        box-sizing: border-box;
+
+                        & header {
+                            font-weight: 700;
+                            text-align: center;
+                            margin-bottom: 35px;
+                        }
+
+                        & #form {
+
+                            & .input-field {
+                                display: flex;
+                                flex-direction: column;
+                                position: relative;
+                                padding: 0;
+                                margin-bottom: 7px;
+
+                                & .input {
+                                    height: 45px;
+                                    width: 100%;
+                                    background: transparent;
+                                    border: none;
+                                    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                                    outline: none;
+                                    margin-top: 12px;
+                                    color: #40414a;
+                                    padding-left: 10px;
+
+                                }
+
+                                .input:focus~.form-label,
+                                .input:valid~.form-label {
+                                    top: -8px;
+                                    font-size: 14px;
+                                }
+
+                                & small {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: red;
+                                }
+
+                                & label {
+                                    position: absolute;
+                                    top: 20px;
+                                    left: 0px;
+                                    font-size: 18px;
+                                    // pointer-events: none;
+                                    transition: all .15s ease-in-out 0s;
+                                }
+
+
+                                & .input:focus {
+                                    border-bottom: 2px solid #2dfd26;
+                                }
+
+                                & .submit {
+                                    border: none;
+                                    outline: none;
+                                    height: 45px;
+                                    background: #ececec;
+                                    border-radius: 5px;
+                                    transition: .4s;
+
+                                    &:hover {
+                                        background: rgba(40, 164, 18, 0.9);
+                                        color: #fff;
+                                    }
+                                }
+                            }
+
+                        }
+
+                        & .login {
+                            text-align: center;
+                            font-size: small;
+                            margin-top: 25px;
+
+                            & span a {
+                                text-decoration: none;
+                                font-weight: 700;
+                                color: rgb(3, 3, 24);
+                                transition: .5s;
+                            }
+
+                            & span a:hover {
+                                text-decoration: underline;
+                                color: rgb(31, 50, 194);
+                            }
+                        }
+
+                        & .sign-up-accounts {
+                            & .social-accounts {
+                                & .fa-brands {
+                                    padding: 11px !important;
+                                    width: 38px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    margin: 1px 3px;
+                                    border-radius: 50%;
+                                }
+
+                                & .fa-google {
+                                    padding: 10px;
+                                    background: conic-gradient(from -45deg,
+                                            #ea4335 110deg,
+                                            #4285f4 90deg 180deg,
+                                            #34a853 180deg 270deg,
+                                            #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+                                    -webkit-background-clip: text;
+                                    background-clip: text;
+                                    color: transparent;
+                                    -webkit-text-fill-color: transparent;
+                                }
+
+                                & .fa-facebook {
+                                    color: #3b5998;
+                                    background-image: linear-gradient(to bottom,
+                                            transparent 20%,
+                                            white 20%,
+                                            white 93%,
+                                            transparent 93%);
+                                    background-size: 55%;
+                                    background-position: 70% 0;
+                                    background-repeat: no-repeat;
+                                }
+
+                                & .fa-twitter {
+                                    color: #00aced;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }

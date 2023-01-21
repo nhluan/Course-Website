@@ -1,0 +1,69 @@
+{{#section "js"}}
+<script>
+    const form = document.getElementById("form");
+    const name = document.getElementById("nameLesson");
+    const link = document.getElementById("link");
+
+
+    function checkInput() {
+        let check = true;
+        let nameValue = name.value.trim();
+        let linkValue = link.value.trim();
+
+        {{!-- var patternlink= /https:\/\/www.youtube.com\/embed\/\w+/; --}}
+
+        if (nameValue == "") {
+            setErrorFor("err-namelesson", name, "title is required");
+            check = false;
+        }
+        if (linkValue == "") {
+            setErrorFor("err-link", name, "link is required");
+            check = false;
+        }
+        {{!-- if (!patternlink.test(linkValue.value)) {
+            setErrorFor("err-link", name, "link is required");
+            check = false;
+        } --}}
+        return check;
+    }
+    function setErrorFor(id, input, msg) {
+        alert(msg)
+        const small = document.getElementById(id)
+        small.innerText = msg;
+    }
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (checkInput()) {
+            form.submit();
+        }
+    });
+</script>
+
+
+{{/section}}
+
+<div class="add-course-wrapper fix-header">
+    <div class="container-fluid">
+        <h1>Add course</h1>
+        <div class="form-container">
+            <form id="form" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="titleCourse">Title course</label>
+                    <input type="text" class="form-control" id="titleCourse" name="Title" readonly
+                        value="{{name_course}}">
+                </div>
+                <div class="form-group">
+                    <label for="nameLesson">Name Lesson<small id="err-namelesson"></small></label>
+                    <input type="text" class="form-control" id="nameLesson" name="nameLesson" 
+                    value="{{lesson.name_lession}}">
+                </div>
+                <div class="form-group">
+                    <label for="link">Link Lesson<small id="err-link"></small></label>
+                    <input type="text" class="form-control" id="link" name="link" 
+                    value="{{lesson.link_video}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

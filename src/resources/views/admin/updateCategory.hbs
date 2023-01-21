@@ -1,0 +1,114 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css" />
+{{/section}}
+{{#section "js"}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/filetype.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/piexif.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/sortable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js"></script>
+<script>
+
+    $('#avatar').fileinput({
+        dropZoneEnabled: false,
+        maxFileCount: 1,
+        theme: 'fa4',
+        allowedFileExtensions: ['jpg', 'png', 'jpeg'],
+    });
+
+    const form = document.getElementById("form");
+    const name = document.getElementById("nameCategory");
+    function checkInput() {
+        let check = true;
+        let nameValue = name.value.trim();
+        if (nameValue === "") {
+            setErrorFor("err-nameCategory", name, 'name is required');
+            check = false;
+        }
+        return check;
+    }
+    function setErrorFor(id, input, msg) {
+        const small = document.getElementById(id)
+        console.log(small);
+        small.innerText = msg;
+    }
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (checkInput()) {
+            form.submit();
+        }
+    });
+
+
+</script>
+
+{{/section}}
+
+
+<div class="d-flex" id="wrapper">
+    {{!-- side bar --}}
+
+    {{> admin/adminSideNav}}
+
+    {{!-- content --}}
+    <div class="page-content-wrapper container-fluid px-5">
+        <nav class="navbar navbar-expand navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 mr-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Dashboard</h2>
+            </div>
+        </nav>
+
+        <div class="container p-5">
+            {{!-- {{#each data}} --}}
+            <div class="row">
+                <div class="col-4">
+                    <form id="form" method="POST" action="" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="hidden" name="referer" value="{{this.referer}}">
+                            {{#with data}}
+                            {{#if id_category_lv2}}
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-lg bg-white" id="nameCategory"
+                                name="nameCategory" value="{{name_category_lv2}}">
+                            <small id="err-nameCategory" class="form-text text-danger"></small>
+                            {{else}}
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-lg bg-white" id="nameCategory"
+                                name="nameCategory" value="{{name_category_lv1}}">
+                            <small id="err-nameCategory" class="form-text text-danger"></small>
+                            {{/if}}
+                        </div>
+                        <div class="form-group my-4">
+                            <img src="/img/{{avatar_category}}" alt="avatar">
+                        </div>
+                        {{/with}}
+                        <div class="form-group">
+                            <label for="avatar">Avatar</label>
+                            <input type="file" name="avatar" id="avatar">
+                        </div>
+                        <div class="form-group">
+                            <label for="parentCategory">Parent</label>
+                            <select class="form-control form-control-lg" name="parentCategory" id="parentCategory"
+                                required>
+                                <option value="none">None</option>
+                                {{#each this.listLv1}}
+                                {{!-- {{#unless id_category_lv2}} --}}
+                                <option value="{{id_category_lv1}}">{{name_category_lv1}}</option>
+                                {{!-- {{/unless}} --}}
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 py-3">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {{!-- {{/each}} --}}
+        </div>
+    </div>
+
+</div>

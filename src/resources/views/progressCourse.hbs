@@ -1,0 +1,140 @@
+{{#section "js"}}
+    <script>
+
+        function goBefore() {
+            console.log("da nhan");
+
+            const lessonE = document.querySelector("#dataLesson");
+            const lessonE1 = document.querySelector("#dataLessonHide");
+
+            let data = lessonE.innerText;
+
+            let myArrayRaw = data.split(",");
+
+            let myArray = [parseInt(myArrayRaw[0]), parseInt(myArrayRaw[1])];
+
+            let startLesson = parseInt(lessonE1.innerText);
+            console.log("Start lesson: ", startLesson);
+
+            const windowPath = window.location.href
+
+            console.log(windowPath);
+
+            if (myArray[1] == startLesson) {
+                //giu nguyen duong link
+                windowPath.replace(windowPath);
+                const pathBefore = "/learn/" + myArray[0] + "/lecture/" + myArray[1];
+                window.location.href = pathBefore;
+            } else {
+                // xu li quay ve bai hoc truoc
+                const idBefore = myArray[1] - 1;
+                const pathBefore = "/learn/" + myArray[0] + "/lecture/" + idBefore;
+                windowPath.replace(pathBefore);
+                window.location.href = pathBefore;
+            }
+        }
+
+        function goAfter() {
+            {{!-- console.log("da nhan"); --}}
+
+            const lessonE = document.querySelector("#dataLesson");
+            const lessonE1 = document.querySelector("#dataLessonHide");
+            const lessonE3 = document.querySelector("#sizeLessonHide");
+
+            let sizeLesson = parseInt(lessonE3.innerText);
+            let data = lessonE.innerText;
+            let myArrayRaw = data.split(",");
+            let myArray = [parseInt(myArrayRaw[0]), parseInt(myArrayRaw[1])];
+            let startLesson = parseInt(lessonE1.innerText);
+            const windowPath = window.location.href
+
+            {{!-- console.log(windowPath); --}}
+
+            console.log(myArray[1])
+            console.log(sizeLesson)
+
+            if (myArray[1] === sizeLesson -1) {
+                //giu nguyen duong link
+                windowPath.replace(windowPath);
+                const pathBefore = "/learn/" + myArray[0] + "/lecture/" + myArray[1];
+                window.location.href = pathBefore;
+            } else {
+                // xu li chuyen tiep bai hoc
+                const idBefore = myArray[1] + 1;
+                const pathBefore = "/learn/" + myArray[0] + "/lecture/" + idBefore;
+                windowPath.replace(pathBefore);
+                window.location.href = pathBefore;
+            }
+        }
+
+        function sendError() {
+            alert("Đã gửi thông tin, vui lòng chờ phản hồi của admin trong email!!!");
+        }
+
+    </script>
+
+{{/section}}
+
+<div class="infor-course">
+<div class="course-header">
+{{#each currentLesson}}
+        <h3>{{name_course}}</h3>
+    </div>
+{{/each}}
+
+    <div class="course-progress">
+        <div class="progress-fill"></div>
+        <span class="progress_percent">
+            Hoàn thành 0/{{sizeLesson}} khóa học
+        </span>
+    </div>
+{{#each currentLesson}}
+        <div id="dataLesson" style="display: none;">
+            {{id_course}}, {{id_lesson}}
+        </div>
+
+    </div>
+    <div class="container-fluid container-course">
+
+        <div class="content-lession">
+            <div class="lession-video">
+                <iframe id="lesson-video" src={{link_video}} height="500" width="800" title="Iframe Example"></iframe>
+            </div>
+            <div class="content-nav">
+                <button onclick="sendError()" type="button" class="btn btn-outline-danger btn-lg">Báo cáo</button>
+                <button type="button" class="btn btn-outline-warning btn-lg">Ghi chú</button>
+                <button onclick="goBefore()" type="button" class="btn btn-outline-dark btn-lg">Bài trước</button>
+                <button onclick="goAfter()" type="button" class="btn btn-outline-success btn-lg">Bài sau</button>
+            </div>
+
+            <div class="lession-title">
+
+                <p id="id-lesson">Bài: {{name_lession}}</p>
+            </div>
+        </div>
+{{/each}}
+
+  <div class="course">
+    <div class="course-chapter">
+      <ul class="course-list-lession">
+        {{#each fullLesson}}
+          <li><a href="/learn/{{id_course}}/lecture/{{id_lesson}}">Bài học {{name_lession}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="dataLessonHide" style="display: none">
+    {{#with fullLesson.[0]}}
+        {{id_lesson}}
+    {{/with}}
+</div>
+
+<div id="sizeLessonHide" style="display: none">
+    {{#with sizeLesson}}
+        {{size}}
+    {{/with}}
+</div>
+
+

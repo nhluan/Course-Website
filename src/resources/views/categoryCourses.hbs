@@ -1,0 +1,256 @@
+{{#section 'js'}}
+ <script>   
+    handleClickCard(".content",".name-course",".course-id")
+    function handleClickCategory() {
+        const categoryElements = document.querySelectorAll('.top-category-card')
+        categoryElements.forEach(c=>{
+            c.onclick = () => {
+                const idCategory = c.querySelector('.category-id').innerText
+                let nameCategory = c.querySelector('.category-title span').innerText 
+                const slugName = toLowerCaseNonAccentVietnamese(nameCategory.replace(/ /g,'-').trim())
+                window.location.replace(window.location.href + 'category/'+ slugName + '?id=' + idCategory + '&name=' + nameCategory);
+            }
+        })
+    }  
+    handleClickCategory() 
+    handleClickPageing()
+    handleClickPrePage()
+</script>
+{{/section}}
+<div class="container">
+  <div class="cate-wrapper">
+    <div class="row d-none">
+      <div class="col-sm-6 col-md-3 col-xs-6">
+        <h2>Tất cả khóa học {{name}}</h2>
+      </div>
+      <div class="col-sm-6 col-md-9 col-xs-6">
+        <div
+          class="u-hot-cate d-flex align-items-center justify-content-between"
+        >
+          <span class="order-new-seo"><i
+              class="fa fa-sort"
+              aria-hidden="true"
+            ></i>Sắp xếp</span>
+          <ul class="d-flex align-items-center mb-0">
+            <li>
+              <a class="sort_by active" data-sort="learn-most" href="javascript:;">Học
+                nhiều nhất</a></li>
+            <li>
+              <a class="sort_by" data-sort="rating" href="javascript:;">Đánh giá
+                cao</a></li>
+            <li>
+              <a class="sort_by" data-sort="new" href="javascript:;">Mới nhất</a></li>
+            <li>
+              <a class="sort_by" data-sort="price-low" href="javascript:;">Giá
+                thấp đến cao</a></li>
+            <li>
+              <a class="sort_by" data-sort="price-high" href="javascript:;">Giá
+                cao đến thấp</a></li>
+          </ul>
+          <button class="btn filter-detail-btn" style="display: none;"><i
+              class="fa fa-filter"
+              aria-hidden="true"
+            ></i></button>
+
+          <div class="text-right view-options">
+            <button class="btn view-option active" data-type="0">
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
+            </button>
+            <button class="btn view-option" data-type="1">
+              <i class="fa fa-th" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-3 col-md-3 col-xs-12 filter-detail d-none">
+        <a
+          href="javascript:void(0)"
+          class="btn-close d-none"
+          onclick="closeNav()"
+        >×</a>
+        <div class="filter-course">
+          <h4>Đánh giá khóa học</h4>
+          <div>
+            <label>
+              <input
+                type="radio"
+                class="star-rate"
+                value="5"
+                name="star-rate"
+              />
+              <span class="star">
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                {{! <i class="fa fa-star-o co-or" aria-hidden="true"></i> }}
+              </span>
+              5
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                class="star-rate"
+                value="4"
+                name="star-rate"
+              />
+              <span class="star">
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star-o co-or" aria-hidden="true"></i>
+              </span>
+              4
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                class="star-rate"
+                value="3"
+                name="star-rate"
+              />
+              <span class="star">
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star co-or" aria-hidden="true"></i>
+                <i class="fa fa-star-o co-or" aria-hidden="true"></i>
+              </span>
+              3
+            </label>
+          </div>
+        </div>
+        <div class="time-course">
+          <h4>Thời lượng video</h4>
+          <div>
+            <label class="checkbox-inline d-flex align-items-center">
+              <input type="checkbox" value="1" class="time-filter" />
+              <span>0 đến 1 giờ</span>
+            </label>
+          </div>
+          <div>
+            <label class="checkbox-inline d-flex align-items-center">
+              <input type="checkbox" value="2" class="time-filter" />
+              <span>0 đến 1 giờ</span>
+            </label>
+          </div>
+          <div>
+            <label class="checkbox-inline d-flex align-items-center">
+              <input type="checkbox" value="3" class="time-filter" />
+              <span>0 đến 1 giờ</span>
+            </label>
+          </div>
+          <div>
+            <label class="checkbox-inline d-flex align-items-center">
+              <input type="checkbox" value="4" class="time-filter" />
+              <span>0 đến 1 giờ</span>
+            </label>
+          </div>
+          <div>
+            <label class="checkbox-inline d-flex align-items-center">
+              <input type="checkbox" value="5" class="time-filter" />
+              <span>0 đến 1 giờ</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-8 col-md-12" id="list_product">
+        <h2>Tất cả khóa học {{name}}</h2>
+        <div class="col-12 col-sm-12 col-md-12 list-product">
+          {{#if this.empty}}
+            <h3 class="card-no-data">No data</h3>
+            <p class="card-text-no-data"> Please visit other categories</p>
+          {{else}}
+            {{#each this.courses}}
+              {{#if_eq active_course 1}}
+                <a class="link-course">
+                  <div class="detail-course d-flex">
+                    <div class="div-img">
+                        <img
+                        class="img-responsive"
+                        src="/img/courses/{{../avatar}}"
+                        alt="{{../name_course}}"
+                      />
+                    </div>
+                    <div class="content d-flex justify-content-between">
+                      <div>
+                        <h3 class="name-course">{{../name_course}}</h3>
+                        <div class="description-course">{{../brief_description}}
+                        </div>
+                        <p class="catego">
+                          {{../name_category_lv1}}
+                        </p>
+                        <div class="name-gv">
+                          {{../name_user}}
+                        </div>
+                        <span class="star-rate d-flex align-items-center">
+                          <span class="card-num-star">{{../point}}</span>
+                          <i class="fa fa-star co-or" aria-hidden="true"></i>
+                          &nbsp;
+                          {{!-- ({{count}}) --}}
+                        </span>
+                      </div>
+                      <div class="price-course">
+                        {{../tuition_fee}}
+                      </div>
+                      <span class="course-id d-none">{{../id_course}}</span>
+                    </div>
+                  </div>
+                </a>
+              {{else}}
+              {{/if_eq}}
+            {{/each}}
+          {{/if}}
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-12 pagination-course">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination d-flex align-items-center justify-content-center">
+              {{#if this.isFirst}}
+                <li class="page-item disabled">
+                  <a class="page-link" href="javascript:;" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+              {{else}}
+                <li class="page-item pre">
+                  <a class="page-link"aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+              {{/if}}
+              {{#each this.pageNumber}}
+                {{#if isCurrent}}
+                  <li class="page-item active" href = "javascript:;"><a class="page-link">{{value}}</a></li>
+                {{else}}
+                  <li class="page-item"><a class="page-link">{{value}}</a></li>
+                {{/if}}
+              {{/each}}
+              {{#if this.isLast}}
+                <li class="page-item disabled">
+                  <a class="page-link" href="javascript:;" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+              </li>
+              {{else}}
+                <li class="page-item next">
+                  <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+              </li>
+              {{/if}}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

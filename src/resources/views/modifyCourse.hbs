@@ -1,0 +1,148 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css" />
+{{/section}}
+
+{{#section "js"}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/filetype.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/piexif.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/sortable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: '.txtDes',
+        menubar: false,
+        plugins: 'paste image link autolink lists table media',
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+        ],
+    });
+</script>
+<script>
+    $('#avatar').fileinput({
+        dropZoneEnabled: false,
+        maxFileCount: 1,
+        theme: 'fa4',
+        allowedFileExtensions: ['jpg', 'png', 'jpeg'],
+    });
+
+    const form = document.getElementById("form");
+    const name = document.getElementById("titleCourse");
+    const price = document.getElementById("priceCourse");
+    const briefDes = document.getElementById("BriefDes");
+    const fullDes = document.getElementById("FullDes");
+
+    function checkInput() {
+        let check = true;
+        let nameValue = name.value.trim();
+        let brief = briefDes.value.trim();
+        let full = fullDes.value.trim();
+        if (nameValue === "") {
+            console.log("haha")
+            setErrorFor("err-nameCategory", "title is required");
+            check = false;
+        }
+        if (price.value == "") {
+            setErrorFor("err-priceCourse", "tuition fee is required");
+            check = false;
+        }
+        if (brief === "") {
+            setErrorFor("err-BriefDes", "brief description is required");
+            check = false;
+        }
+        if (full === "") {
+            setErrorFor("err-FullDes", "detail description is required");
+            check = false;
+        }
+        return check;
+    }
+    function setErrorFor(id, msg) {
+        alert(msg)
+        const small = document.getElementById(id)
+        small.innerHTML = msg;
+    }
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (checkInput()) {
+            form.submit();
+        }
+    });
+</script>
+{{/section}}
+
+<div class="add-course-wrapper fix-header">
+    <div class="container-fluid">
+        <h1>Add course</h1>
+        <div class="form-container">
+            <form id="form" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="titleCourse">Title course <small id="err-titleCourse"></small></label>
+                    <input type="text" class="form-control" id="titleCourse" name="Title" value="{{name_course}}">
+                </div>
+                <div class="form-group">
+                    <label for="priceCourse">Tuition fee course <small id="err-priceCourse"></small></label>
+                    <input type="number" class="form-control" id="priceCourse" name="Price" value="{{tuition_fee}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="IdTeacher" value="{{authUser.id_user}}" class="d-none">
+                </div>
+                <div class="form-group">
+                    <label for="txtBriefDes">Brief Description <small id="err-BriefDes"></small></label>
+                    <textarea class="txtDes" id="BriefDes" name="BriefDes">{{{brief_description}}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="txtFullDes">Detail Description <small id="err-FullDes"></small></label>
+                    <textarea class="txtDes" id="FullDes" name="FullDes">{{{detail_description}}}</textarea>
+                </div>
+                {{!-- <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <input type="text" class="form-control" id="duration" name="Duration">
+                </div> --}}
+                {{!-- <div class="form-group">
+                    <label for="numLessons">Number of lessons</label>
+                    <input type="text" class="form-control" id="numLessons" name="NumLessons">
+                </div>
+                <div class="form-group">
+                    <label for="numChapters">Number of lessons</label>
+                    <input type="text" class="form-control" id="numChapters" name="NumChapters">
+                </div> --}}
+                {{!-- <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" id="status" name="Status">
+                </div> --}}
+                <div class="form-group">
+                    <label for="avatar">Avatar <small id="err-avatar"></small></label>
+                    <input type="file" name="avatar" id="avatar">
+                </div>
+                {{!-- <div class="form-group">
+                    <label for="nameCategoryLv1">Điểm đánh giá của bạn:</label>
+                    <select id="nameCategoryLv1" name="nameCategoryLv1">
+
+                    </select>
+                </div> --}}
+                {{!-- <div class="form-group">
+                    <label for="categoryLv1">Name category Level 1</label>
+                    <select id="categoryLv1" name="CategoryLevel1">
+                        {{#each listCategory}}
+                        <option value={{id_category_lv1}}>{{name_category_lv1}}</option>
+                        {{/each}}
+                    </select>
+                </div> --}}
+                <div class="form-group">
+                    <label for="categoryLv2">Name category Level 2</label>
+                    <select id="categoryLv2" name="CategoryLevel2">
+                        {{#each listCategory}}
+                        {{#each listArray2}}
+                        <option value={{id_category_lv2}}>{{name_category_lv2}}</option>
+                        {{/each}}
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

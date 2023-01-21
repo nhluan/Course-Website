@@ -1,0 +1,19 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light py-4 justify-content-between">
+    <button type="button" class="btn btn-lg btn-link ml-4 p-3" aria-expanded="false">
+        <i class="fa-solid fa-lg fa-backward"></i>
+        <a href="/"><b>Back home page</b></a>
+    </button>
+    <div class="d-flex mr-5">
+        <button type="button" class="btn btn-lg btn-primary ml-4 p-3" aria-expanded="false">
+            <i class="fa-solid fa-lg fa-door-open"></i>
+            Hi, <b>{{authUser.name_user}}</b>
+        </button>
+        <form id="frmLogout" action="/auth/logout" method="post"></form>
+        <button type="button" class="btn btn-lg btn-danger ml-5 p-3" aria-expanded="false">
+            <a style="color: white" href="javascript: $('#frmLogout').submit();">
+                <i class="fa fa-lg fa-sign-out" aria-hidden="true"></i>
+                <b>Log out</b>
+            </a>
+        </button>
+    </div>
+</nav>

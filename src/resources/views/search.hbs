@@ -1,0 +1,278 @@
+<div class="row fix-header">
+    <div class="col-12">
+        {{#if this.checkAllCourse}}
+        <h2>{{this.length}} kết quả cho tất cả các khóa học</h2>
+        {{else}}
+        <h2>{{this.length}} kết quả cho "{{this.course_search}}"</h2>
+        {{/if}}
+    </div>
+    <div class="col-12 d-flex justify-content-between mb-3">
+        <div class="d-flex ">
+            {{!-- <button type="button" data-toggle="collapse" data-target="#all-filter">
+                <span class="fa fa-bars"></span>
+                <span>Bộ lọc</span>
+            </button> --}}
+            <div class="dropdown">
+                <button class="d-flex justify-content-between dropdown-sort position-relative dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span style="font-size:10px; position:absolute; top: 10px;">Sắp xếp theo</span>
+                    <span id="dropdown-sort-item" style="position:relative;top: 15px;">Nhiều lượt xem nhất</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" onclick="handleClickQuery('sort','views')">Nhiều lượt xem nhất</a>
+                    <a class="dropdown-item" onclick="handleClickQuery('sort','reviews')">Nhiều đánh giá nhất</a>
+                    <a class="dropdown-item" onclick="handleClickQuery('sort','point')">Nhiều sao nhất</a>
+                    <a class="dropdown-item" onclick="handleClickQuery('sort','tuition_fee')">Giá cao nhất</a>
+                    <a class="dropdown-item" onclick="handleClickQuery('sort','creation_date')">Mới nhất</a>
+
+                </div>
+            </div>
+            <a type="button" class="btn" style="font-size: 15px; line-height: 60px;"
+                href="http://localhost:3000/search/{{this.course_search}}">xóa bộ lọc</a>
+        </div>
+        <div class="d-flex align-items-end">
+            <p>{{this.length}} kết quả</p>
+        </div>
+    </div>
+    <div class="col-12 d-flex flex-nowrap mb-5">
+        <div class="mr-5">
+            <hr>
+            <div>
+                <div type="button" class="d-flex justify-content-between btn-dropdown-filter" data-toggle="collapse"
+                    data-target="#dropdown-filter_rating">
+                    <span>Xếp hạng</span>
+                    <span class="fa-sharp fa-solid fa-chevron-down"></span>
+                </div>
+                <div id="dropdown-filter_rating" class="collapse show">
+                    <button type="button" class="d-block" onclick="handleClickQuery('rating','4.5')">
+                        <span id="rating_4.5" class="fa-regular fa-circle"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star-half-o rating_star"></span>
+                        <span>từ 4.5 trở lên</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('rating','4')">
+                        <span id="rating_4" class="fa-regular fa-circle"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star-o rating_star"></span>
+                        <span>từ 4.0 trở lên</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('rating','3.5')">
+                        <span id="rating_3.5" class="fa-regular fa-circle"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star-half-o rating_star"></span>
+                        <span class="fa fa-star-o rating_star"></span>
+                        <span>từ 3.5 trở lên</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('rating','3')">
+                        <span id="rating_3" class="fa-regular fa-circle"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star rating_star"></span>
+                        <span class="fa fa-star-o rating_star"></span>
+                        <span class="fa fa-star-o rating_star"></span>
+                        <span>từ 3.0 trở lên</span>
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <div type="button" class="d-flex justify-content-between btn-dropdown-filter" data-toggle="collapse"
+                    data-target="#dropdown-filter_languaes">
+                    <span>Ngôn ngữ</span>
+                    <span class="fa-sharp fa-solid fa-chevron-down"></span>
+                </div>
+                <div id="dropdown-filter_languaes" class="collapse show">
+                    <button type="button" class="d-block" onclick="handleClickQuery('lang','eng')">
+                        <span id="lang_eng" class="fa-regular fa-square"></span>
+                        <span>English</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('lang','vn')">
+                        <span id="lang_vn" class="fa-regular fa-square"></span>
+                        <span>Viet Nam</span>
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <div type="button" class="d-flex justify-content-between btn-dropdown-filter " data-toggle="collapse"
+                    data-target="#dropdown-filter_time">
+                    <span>Thời lượng video</span>
+                    <span class="fa-sharp fa-solid fa-chevron-down"></span>
+                </div>
+                <div id="dropdown-filter_time" class="collapse show">
+                    <button type="button" class="d-block" onclick="handleClickQuery('duration','1')">
+                        <span id="duration_1" class="fa-regular fa-square"></span>
+                        <span>0-1 giờ</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('duration','2')">
+                        <span id="duration_2" class="fa-regular fa-square"></span>
+                        <span>1-3 giờ</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('duration','3')">
+                        <span id="duration_3" class="fa-regular fa-square"></span>
+                        <span>3-? giờ</span>
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <div type="button" class="d-flex justify-content-between btn-dropdown-filter" data-toggle="collapse"
+                    data-target="#dropdown-filter_price">
+                    <span>Giá</span>
+                    <span class="fa-sharp fa-solid fa-chevron-down"></span>
+                </div>
+                <div id="dropdown-filter_price" class="collapse show">
+                    <button type="button" class="d-block" onclick="handleClickQuery('price','free')">
+                        <span id="free" class="fa-regular fa-square"></span>
+                        <span>Free</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('price','pay')">
+                        <span id="pay" class="fa-regular fa-square"></span>
+                        <span>Pay</span>
+                    </button>
+                    <button type="button" class="d-block" onclick="handleClickQuery('price','promotion')">
+                        <span id="promotion" class="fa-regular fa-square"></span>
+                        <span>Promotion</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grow-1">
+            {{#if this.empty}}
+            <p class="text-center">không có kết quả tìm kiếm</p>
+            {{/if}}
+            {{#each this.courses}}
+            <div class="d-flex justify-content-between search_course position-relative shadow">
+                <div class="d-flex flex-nowrap ">
+                    <img class="imgg" src="/img/courses/{{avatar}}" alt="ảnh đó ku">
+                    <div class="ml-3 ">
+                        <strong>{{name_course}}</strong>
+                        <p>Lĩnh vực {{name_category_lv1}}</p>
+                        <div>
+                            <span style="color: orange;">{{point}}</span>
+                            <span class="fa fa-star rating_star"></span>
+                        </div>
+                        {{{brief_description}}}
+                        <p>tổng phút {{duration}}, {{num_lesson}} bài giảng</p>
+                    </div>
+                </div>
+                <div class="flex-shrink-0 d-flex flex-column justify-content-between align-items-end">
+
+                    <span>{{tuition_fee}}đ</span>
+                    <div>
+                        <a type="button" class="btn btn-success align-content-center"
+                            href="http://localhost:3000/course/{{name_course}}?id={{id_course}}"
+                            onclick="console.log('a')">
+                            <p>đi tới</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+            {{#if this.empty}}
+            {{else}}
+
+            <div class="col-12 col-sm-12 col-md-12 pagination-course">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination d-flex align-items-center justify-content-center">
+                        {{#if this.isFirst}}
+                        <li class="page-item disabled">
+                            <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {{else}}
+                        <li class="page-item pre">
+                            <a class="page-link" aria-label="Previous" onclick="handleClickPage('pre')">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {{/if}}
+                        {{#each this.pageNumber}}
+                        {{#if isCurrent}}
+                        <li class="page-item active"><a class="page-link"
+                                onclick="handleClickPage('{{value}}')">{{value}}</a></li>
+                        {{else}}
+                        <li class="page-item"><a class="page-link" onclick="handleClickPage('{{value}}')">{{value}}</a>
+                        </li>
+                        {{/if}}
+                        {{/each}}
+                        {{#if this.isLast}}
+                        <li class="page-item disabled">
+                            <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {{else}}
+                        <li class="page-item next">
+                            <a class="page-link" aria-label="Next" onclick="handleClickPage('next')">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </nav>
+            </div>
+            {{/if}}
+        </div>
+
+    </div>
+
+</div>
+
+{{#section 'js'}}
+<script>
+
+    if ("{{ this.rating }}" != "") {
+        document.getElementById("rating_{{ this.rating }}").className = "fa-regular fa-circle-check";
+    }
+    if ("{{ this.lang }}" != "") {
+        document.getElementById("lang_{{ this.lang }}").className = "fa-regular fa-square-check";
+    }
+    if ("{{ this.duration }}" != "") {
+        document.getElementById("duration_{{ this.duration }}").className = "fa-regular fa-square-check";
+    }
+    if ("{{ this.price }}" != "") {
+        document.getElementById("{{ this.price }}").className = "fa-regular fa-square-check";
+    }
+
+    let value= "Nhiều lượt xem nhất";
+    if ("{{sort}}" == "reviews") { value = "Nhiều đánh giá nhất" }
+    else if ("{{sort}}" == "point") { value = "Nhiều sao nhất" }
+    else if ("{{sort}}" == "tuition_fee") { value = "Giá cao nhất" }
+    else if ("{{sort}}" == "creation_date") { value = "Mới nhất" }
+    document.getElementById("dropdown-sort-item").innerHTML = value;
+
+    function handleClickQuery(key, value) {
+        let url = new URL(window.location);
+        let search_params = url.searchParams;
+        search_params.set(key, value);
+        window.location.replace(url.toString());
+    }
+
+    function handleClickPage(paging) {
+        let url = new URL(window.location);
+        let search_params = url.searchParams;
+
+        let newpage;
+
+        if (paging == 'pre') {
+            newpage = parseInt(search_params.get('page')) - 1;
+        } else if (paging == 'next') {
+            newpage = parseInt(search_params.get('page')) + 1;
+        } else newpage = paging;
+        search_params.set('page', newpage);
+        window.location.replace(url.toString());
+    }
+
+</script>
+{{/section}}

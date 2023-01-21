@@ -1,0 +1,80 @@
+
+
+<div class="d-flex" id="wrapper">
+    {{!-- side bar --}}
+
+    {{> admin/adminSideNav}}
+
+    {{!-- content --}}
+    <div class="page-content-wrapper container-fluid px-5">
+        <nav class="navbar navbar-expand navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 mr-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Dashboard</h2>
+            </div>
+        </nav>
+
+        <div class="row justify-content-end" style="margin-top: 100px;">
+            <div class="col-4">
+                {{#if message}}
+                {{#if_eq type "success"}}
+                <div style="background-color: rgb(5, 106, 72); color: white"
+                    class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Notice!</strong> {{../message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{else}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Notice!</strong> {{../message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{/if_eq}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="container shadow-lg p-5 bg-white rounded" style="margin-bottom: 140px;margin-top: 50px;">
+            <div class="row justify-content-between">
+                <div class="col"><i class="fa-solid fa-user mr-2"></i><b>Information user</b></div>
+                {{!-- <div class="col text-right"><a href="/auth/requestPasswordReset" type="button"
+                        class="btn btn-warning"><i class="fa-solid fa-spinner mr-2"></i>Thay doi mat
+                        khau</a></div> --}}
+
+            </div>
+            {{#each data}}
+            <div class="row d-flex justify-content-between mx-4">
+                <div class="col-6 text-center">
+                    <span><b> Avatar </b></span>
+                    <img src="/img/{{avatar_user}}" alt="avatar" class="rounded img-fluid">
+
+                </div>
+                <div class="col-6  w-100">
+                    <form id="form" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control form-control-lg bg-white">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control form-control-lg bg-white" name="email" id="email"
+                                readonly value="{{email}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">username</label>
+                            <input type="text" class="form-control form-control-lg bg-white" id="username" readonly
+                                name="username" value="{{name_user}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of birth</label>
+                            <input type="text" class="form-control form-control-lg bg-white" id="dob" name="dob"
+                                readonly value="{{date_of_birth}}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+</div>

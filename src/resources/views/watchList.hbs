@@ -1,0 +1,31 @@
+<div class="container" style="
+    margin-top: 14rem;
+    margin-bottom: 5rem;
+">
+    <h2 style="margin-bottom: 3rem;">Khóa học yêu thích của tôi</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Khóa học
+                </th>
+                <th scope="col">Giảng viên
+                </th>
+                <th scope="col" style=" display: flex; justify-content: center;">Đi đến
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each watchListUser}}
+            <tr>
+                <td>{{name_course}}</td>
+                <td>{{name_user}}</td>
+                <td><a class="btn btn-primary mx-auto" href="{{linkCourse}}" role="button" style="
+    font-size: 1.5rem;
+    width: max-content;
+    display: flex;
+">Xem chi tiết</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,407 @@
+.active-star {
+  color: yellow;
+}
+
+.body-course {
+  margin-top: 80px;
+}
+
+.name {
+  height: max-content;
+  width: 63%;
+  background-color: #0b3955;
+  color: white;
+  margin-top: 8rem;
+  padding-bottom: 1.5rem;
+
+  h1 {
+    padding-top: 15px;
+  }
+}
+
+.detail-rate {
+  font-size: 1.2rem;
+}
+
+.name-intro {
+  display: flex;
+  justify-content: space-between;
+  height: max-content;
+  margin: 0 2rem;
+  align-content: center;
+
+  .name-intro-right {
+    display: flex;
+    width: max-content;
+    justify-content: space-between;
+    align-items: center;
+
+    .detail-teacher {
+      height: max-content;
+      width: max-content;
+      display: flex;
+      align-items: center;
+      margin-right: 10rem;
+    }
+
+    .detail-rate {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  input[type=submit] {
+    width: max-content;
+    height: max-content;
+    padding: 2rem 2rem;
+    background-color: white;
+    border-radius: 4rem;
+  }
+
+  input[type=submit]:hover {
+    opacity: 0.7;
+  }
+
+  intro-guest {
+    height: max-content;
+    padding: 2rem 2rem;
+    width: 30%;
+    background-color: white;
+  }
+
+}
+
+.detail-course {
+  margin-top: 10px;
+
+  .course-img {
+    width: 63%;
+    height: 40%;
+  }
+
+  .detail-nav {
+    margin-top: 10px;
+    list-style-type: none;
+    display: flex;
+    height: 50px;
+    width: 63%;
+    background-color: white;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: 700;
+    border-radius: 3px;
+
+    li {
+      a {
+        padding: 14.5px 25px;
+      }
+
+      a:hover {
+        background-color: gray;
+      }
+    }
+  }
+
+  .learn-what {
+    height: max-content;
+    width: 63%;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 3px;
+    padding: 5px 25px;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      padding-top: 15px;
+    }
+
+    .adv-list {
+      list-style-type: none;
+
+      li {
+        margin: 5px 0;
+        margin-left: 25px;
+      }
+    }
+  }
+
+  #intro-cour {
+    height: max-content;
+    width: 63%;
+    background-color: white;
+    margin-top: 10px;
+    padding: 5px 25px;
+    border-radius: 3px;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      padding-top: 10px;
+    }
+
+    p {
+      font-weight: 200;
+    }
+
+    h5 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 20px 0;
+    }
+
+    .intro-list-nega {
+      margin-left: 25px;
+    }
+
+    .intro-adv {
+      padding-top: 10px;
+    }
+  }
+}
+
+#content-cour {
+  height: max-content;
+  width: 63%;
+  background-color: white;
+  border-radius: 3px;
+  margin-top: 10px;
+
+  p {
+    font-size: 2rem;
+    font-weight: 700;
+    padding-top: 15px;
+    padding-left: 25px;
+  }
+
+  .body-list {
+    list-style-type: none;
+    margin-left: 25px;
+    padding-right: 25px;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+#intro-teacher {
+  height: 310px;
+  width: 63%;
+  background-color: white;
+  border-radius: 3px;
+  margin-top: 10px;
+
+  .intro-teacher-title {
+    font-size: 2rem;
+    font-weight: 700;
+    padding-top: 15px;
+    padding-left: 25px;
+  }
+
+  .detail-teacher {
+    display: flex;
+    margin: 25px 25px;
+    justify-content: space-between;
+
+    .teacher-left {
+      width: 35%;
+
+      p {
+        margin-top: 10px;
+      }
+    }
+
+    .teacher-right {
+      padding-left: 15px;
+      margin-left: 30px;
+
+      a {
+        font-weight: 700;
+        font-size: 1.8rem;
+      }
+
+      p {
+        margin-top: 15px;
+        font-style: italic;
+      }
+
+      ul {
+        list-style-type: circle;
+
+        li {
+          font-size: 1.5rem;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}
+
+#rate {
+  height: max-content;
+  width: 63%;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 3px;
+
+  .rate-title {
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 15px 25px;
+    padding-bottom: 0;
+  }
+
+  .rate-body {
+    p {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      font-size: 6rem;
+      font-weight: 600;
+
+      i {
+        margin-top: 1rem;
+        margin-left: 1rem;
+      }
+    }
+
+    .rate-number {
+      font-size: 2rem;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+    }
+
+    .rate-content {
+      list-style-type: none;
+      margin-top: 5rem;
+
+      li {
+        padding-left: 3rem;
+        font-size: 1.5rem;
+      }
+    }
+
+
+  }
+}
+
+.inputCmt {
+  height: max-content;
+  width: 63%;
+  background-color: white;
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+
+  .inputCmt-title {
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 15px 25px;
+    padding-bottom: 0;
+  }
+
+  .point-input {
+    margin-left: 2.5rem;
+
+    select {
+      margin-left: 5rem;
+    }
+  }
+
+  .content-input {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    margin-bottom: 2.5rem;
+
+    textarea {
+      width: 100%;
+      height: 10rem;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+    }
+  }
+
+  input[type=submit] {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 1.5rem 2.5rem;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+}
+
+.handle-course {
+  width: 380px;
+  height: max-content;
+  position: absolute;
+  background-color: white;
+  border-radius: 8px;
+  top: 14rem;
+  left: 945px;
+  padding-bottom: 2rem;
+
+  .handle-buy {
+    display: block;
+    width: 90%;
+    height: 60px;
+    background-color: green;
+    text-align: center;
+    line-height: 60px;
+    margin: auto;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 7px;
+  }
+
+  .handle-add {
+    display: block;
+    width: 90%;
+    height: 60px;
+    background-color: red;
+    text-align: center;
+    line-height: 60px;
+    margin: auto;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 7px;
+    margin-top: 20px;
+  }
+
+  .handle-adv {
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  .handle-buy:hover {
+    opacity: 0.7;
+  }
+
+  .handle-add:hover {
+    opacity: 0.7;
+  }
+}
+
+.body-course {
+  background-color: #f3f3f3;
+}
